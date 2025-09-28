@@ -51,8 +51,7 @@ public class AutoMessage extends JavaPlugin {
 
     private String stripInteractiveTags(String text) {
         if (text == null) return "";
-        // Простейшая очистка: убираем click:... и hover:... теги
-        // Можно усложнить regex или использовать парсер MiniMessage, если надо
+
         return text
                 .replaceAll("(?i)<click:[^>]*>","")
                 .replaceAll("(?i)</click>","")
@@ -80,7 +79,6 @@ public class AutoMessage extends JavaPlugin {
                         switch (type) {
                             case "actionbar" -> {
                                 String raw = map.get("text").toString();
-                                // удаляем интерактивные теги
                                 String stripped = stripInteractiveTags(raw);
                                 String parsed = PlaceholderAPI.setPlaceholders(player, stripped);
                                 Component comp = mm.deserialize(parsed);
@@ -114,7 +112,6 @@ public class AutoMessage extends JavaPlugin {
                                 }
                                 String parsed = PlaceholderAPI.setPlaceholders(player, finalMessage);
 
-                                // MiniMessage десериализация со всеми интерактивными тегами
                                 Component comp = mm.deserialize(parsed);
 
                                 player.sendMessage(comp);
