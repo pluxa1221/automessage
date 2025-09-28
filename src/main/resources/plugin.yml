@@ -4,7 +4,7 @@ version: 1.0
 api-version: 1.20
 author: MihailPrud
 description: Плагин на автоматические сообщения от студии NeveTime
-depend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI]
 
 commands:
   broadcast:
