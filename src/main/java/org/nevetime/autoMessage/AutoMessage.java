@@ -71,7 +71,13 @@ public class AutoMessage extends JavaPlugin {
         for (Map<?, ?> map : list) {
             String type = (String) map.get("type");
 
-            int period = (map.get("period") instanceof Number n) ? n.intValue() : 300;
+            int period;
+            if (map.get("period") instanceof Number n) {
+                int value = n.intValue();
+                period = value > 1000 ? value : value * 20;
+            } else {
+                period = 6000;
+            }
 
             BukkitTask task = new BukkitRunnable() {
                 @Override
