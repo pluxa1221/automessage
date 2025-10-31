@@ -70,6 +70,7 @@ public class AutoMessage extends JavaPlugin {
 
         for (Map<?, ?> map : list) {
             String type = (String) map.get("type");
+
             int period = (map.get("period") instanceof Number n) ? n.intValue() : 300;
 
             BukkitTask task = new BukkitRunnable() {
@@ -78,43 +79,50 @@ public class AutoMessage extends JavaPlugin {
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         switch (type) {
                             case "actionbar" -> {
-                                String raw = map.get("text").toString();
-                                String stripped = stripInteractiveTags(raw);
-                                String parsed = PlaceholderAPI.setPlaceholders(player, stripped);
-                                Component comp = mm.deserialize(parsed);
-                                player.sendActionBar(comp);
+                                if (map.get("text") == null) {
+                                    String raw = map.get("text").toString();
+
+                                    String stripped = stripInteractiveTags(raw);
+                                    String parsed = PlaceholderAPI.setPlaceholders(player, stripped);
+                                    Component comp = mm.deserialize(parsed);
+                                    player.sendActionBar(comp);
+                                }
                             }
                             case "title" -> {
-                                String rawTitle = map.get("title").toString();
-                                String rawSub = map.get("subtitle").toString();
+                                if (map.get("title") != null && map.get("subtitle") != null) {
+                                    String rawTitle = map.get("title").toString();
+                                    String rawSub = map.get("subtitle").toString();
 
-                                String strippedTitle = stripInteractiveTags(rawTitle);
-                                String strippedSub = stripInteractiveTags(rawSub);
+                                    String strippedTitle = stripInteractiveTags(rawTitle);
+                                    String strippedSub = stripInteractiveTags(rawSub);
 
-                                String parsedTitle = PlaceholderAPI.setPlaceholders(player, strippedTitle);
-                                String parsedSub = PlaceholderAPI.setPlaceholders(player, strippedSub);
+                                    String parsedTitle = PlaceholderAPI.setPlaceholders(player, strippedTitle);
+                                    String parsedSub = PlaceholderAPI.setPlaceholders(player, strippedSub);
 
-                                Component compTitle = mm.deserialize(parsedTitle);
-                                Component compSub = mm.deserialize(parsedSub);
+                                    Component compTitle = mm.deserialize(parsedTitle);
+                                    Component compSub = mm.deserialize(parsedSub);
 
-                                player.showTitle(Title.title(compTitle, compSub));
+                                    player.showTitle(Title.title(compTitle, compSub));
+                                }
                             }
                             default -> {
-                                Object raw = map.get("text");
-                                String finalMessage;
+                                if (map.get("text") != null) {
+                                    Object raw = map.get("text");
+                                    String finalMessage;
 
-                                if (raw instanceof List<?> list) {
-                                    finalMessage = list.stream()
-                                            .map(Object::toString)
-                                            .collect(Collectors.joining("<newline>"));
-                                } else {
-                                    finalMessage = String.valueOf(raw);
+                                    if (raw instanceof List<?> list) {
+                                        finalMessage = list.stream()
+                                                .map(Object::toString)
+                                                .collect(Collectors.joining("<newline>"));
+                                    } else {
+                                        finalMessage = String.valueOf(raw);
+                                    }
+                                    String parsed = PlaceholderAPI.setPlaceholders(player, finalMessage);
+
+                                    Component comp = mm.deserialize(parsed);
+
+                                    player.sendMessage(comp);
                                 }
-                                String parsed = PlaceholderAPI.setPlaceholders(player, finalMessage);
-
-                                Component comp = mm.deserialize(parsed);
-
-                                player.sendMessage(comp);
                             }
 
                         }
