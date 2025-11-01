@@ -7,12 +7,14 @@ description: Плагин на автоматические сообщения �
 softdepend: [PlaceholderAPI]
 
 commands:
-  broadcast:
+  automessage:
     description: AutoMessage plugin commands
     usage: /automessage <reload|restart>
     permission: automessage.admin
+    aliases:
+      - am
 
 permissions:
   automessage.admin:
-    description: Allows managing the Broadcast plugin
+    description: Allows managing the AutoMessage plugin
     default: op
