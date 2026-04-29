@@ -49,6 +49,7 @@ public class BroadcastManager {
 
     private void loadBroadcasts() {
         List<Map<?, ?>> list = plugin.getConfig().getMapList("messages");
+
         if (list.isEmpty()) {
             plugin.getLogger().severe("Не удалось найти или загрузить секцию messages!");
         } else {
@@ -73,11 +74,11 @@ public class BroadcastManager {
                         switch (type) {
                             case "actionbar" -> {
                                 if (map.get("text") == null) {
-                                    String raw = map.get("text").toString();
-
-                                    String stripped = (raw);
+                                    String stripped = (map.get("text").toString());
                                     String parsed = PlaceholderAPI.setPlaceholders(player, stripped);
+
                                     Component comp = mm.deserialize(parsed);
+
                                     player.sendActionBar(comp);
                                 }
                             }
