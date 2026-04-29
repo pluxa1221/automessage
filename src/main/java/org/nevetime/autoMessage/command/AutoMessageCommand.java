@@ -7,8 +7,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.nevetime.autoMessage.AutoMessage;
+import org.nevetime.autoMessage.BroadcastManager;
 
 public class AutoMessageCommand implements CommandExecutor {
+    private final BroadcastManager broadcastManager;
     private final AutoMessage plugin;
     private final MiniMessage mm;
     private final String prefix;
@@ -17,6 +19,7 @@ public class AutoMessageCommand implements CommandExecutor {
         this.plugin = plugin;
         this.mm = plugin.getMiniMessage();
         this.prefix = plugin.getPrefix();
+        this.broadcastManager = plugin.getBroadcastManager();
     }
 
     @Override
@@ -37,7 +40,7 @@ public class AutoMessageCommand implements CommandExecutor {
                 sender.sendMessage(this.plugin.getConfig().getString("command-messages.reload-success", "&aConfiguration reloaded successfully."));
             }
             case "restart" -> {
-                this.plugin.restartBroadcasts();
+                this.broadcastManager.restart();
                 sender.sendMessage(plugin.getConfig().getString("command-messages.restart-success", "&aAutoMessages restarted successfully."));
             }
             default -> sender.sendMessage(this.plugin.getConfig().getString("command-messages.unknown-arg", "&cUnknown argument. Please specify a valid subcommand."));
