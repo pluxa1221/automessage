@@ -39,7 +39,7 @@ public class BroadcastManager {
     }
 
     public void stop() {
-        loadBroadcasts();
+        cancelTasks();
     }
 
     private void cancelTasks() {
