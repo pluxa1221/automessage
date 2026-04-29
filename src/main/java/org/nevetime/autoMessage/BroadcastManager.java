@@ -121,7 +121,7 @@ public class BroadcastManager {
                         }
                     }
                 }
-            }.runTaskTimer(this, period, period);
+            }.runTaskTimer(this.plugin, period, period);
 
             tasks.add(task);
         }
