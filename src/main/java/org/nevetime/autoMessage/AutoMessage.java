@@ -11,11 +11,15 @@ import java.util.List;
 
 public class AutoMessage extends JavaPlugin {
 
+    // Utils
     private final MiniMessage mm = MiniMessage.miniMessage();
-    private final AutoMessageUtils utils = new AutoMessageUtils();
+
+    // Managers
+    private final BroadcastManager broadcastManager = new BroadcastManager(this);
+
+    // Variables
     private String prefix;
 
-    // Events
     @Override
     public void onEnable() {
         saveDefaultConfig();
@@ -27,17 +31,21 @@ public class AutoMessage extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        utils.cancelTasks();
+        broadcastManager.stop();
     }
 
-    // Internal methods
     public void reloadPluginConfig() {
         reloadConfig();
         prefix = getConfig().getString("prefix", "<gray>[AutoMessage] ");
-        restartBroadcasts();
+        broadcastManager.restart();
     }
 
     // Getters
+
+    public BroadcastManager getBroadcastManager() {
+        return broadcastManager;
+    }
+
     public MiniMessage getMiniMessage() {
         return mm;
     }
