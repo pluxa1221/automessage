@@ -1,49 +1,42 @@
-# Префикс плагина
+# Plugin chat prefix
 prefix: "<gradient:#00ffcc:#0066ff>[AutoMessage]</gradient> "
 
-# Сообщения для команд
+# Command messages
 command-messages:
-  reload: "<green>✅ Конфиг успешно перезагружен!</green>"
-  no-permission: "<red>⛔ У вас нет прав для этой команды!</red>"
-  unknown: "<yellow>🤔 Неизвестная команда. Попробуйте /automessage reload</yellow>"
+  reload: "<green>✅ Config successfully reloaded!</green>"
+  no-permission: "<red>⛔ You haven't need permission to execute this command!</red>"
+  unknown: "<yellow>🤔 Unknown command. Try /automessage reload</yellow>"
 
-# Сообщения для рассылки
+# Messages for sending (examples)
 messages:
-  # 1. Классическое сообщение в чат с PlaceholderAPI и кликом
-  - text: "<gold>Добро пожаловать, <green>%player_name%</green>!</gold> <newline><click:run_command:'/shop'><aqua>[Открой магазин]</aqua></click>"
+  - text: "<gold>Welcome, <green>%player_name%</green>!</gold> <newline><click:run_command:'/shop'><aqua>[Open shop]</aqua></click>"
     type: chat
     period: 120
 
-  # 2. Сообщение в actionbar c PlaceholderAPI
-  - text: "<yellow>Ваш баланс: <green>%vault_eco_balance_fixed%</green> монет</yellow>"
+  - text: "<yellow>Your balance: <green>%vault_eco_balance_fixed%</green> coins</yellow>"
     type: actionbar
     period: 180
 
-  # 3. Сообщение с кликом по ссылке
-  - text: "<blue>📢 Подпишитесь на наш Discord! </blue><click:open_url:'https://discord.gg/yourserver'><gradient:#ff00ff:#00ffff>[ЖМИ]</gradient></click>"
+  - text: "<blue>📢 Subscribe to us in the Discord! </blue><click:open_url:'https://discord.gg/yourserver'><gradient:#ff00ff:#00ffff>[PRESS]</gradient></click>"
     type: chat
     period: 300
 
-  # 4. Сообщение title (заголовок + подзаголовок)
   - text:
-      title: "<gradient:#ff0000:#ffaa00>⚔ PvP Зона!</gradient>"
-      subtitle: "<white>Осторожно, <red>пвп включено!</red></white>"
+      title: "<gradient:#ff0000:#ffaa00>⚔ PvP Zone!</gradient>"
+      subtitle: "<white>Careful, <red>PVP is enabled!</red></white>"
     type: title
     period: 400
 
-  # 5. Сложный градиент с иконками
-  - text: "<gradient:#ff00cc:#6600ff>❖ Голосуйте за сервер каждые 24 часа! ❖</gradient> <newline><click:open_url:'https://topcraft.ru/vote'><yellow>[Голосовать]</yellow></click>"
+  - text: "<gradient:#ff00cc:#6600ff>❖ Vote for the server every 24 hours! ❖</gradient> <newline><click:open_url:'https://topcraft.ru/vote'><yellow>[Vote]</yellow></click>"
     type: chat
     period: 600
 
-  # 6. Комбинация: actionbar с прогрессом
-  - text: "<green>⏳ Осталось <aqua>%server_time_12%</aqua> до ивента!</green>"
+  - text: "<green>⏳ Left <aqua>%server_time_12%</aqua> to the event!</green>"
     type: actionbar
     period: 60
 
-  # 7. Огромный title с плавными цветами
   - text:
-      title: "<gradient:#00ff00:#006600>🌱 Сажайте деревья!</gradient>"
-      subtitle: "<yellow>Купите саженцы в /shop</yellow>"
+      title: "<gradient:#00ff00:#006600>🌱 Plant trees!</gradient>"
+      subtitle: "<yellow>Buy seedings in the /shop</yellow>"
     type: title
     period: 900
