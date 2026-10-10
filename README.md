@@ -18,7 +18,7 @@ command-messages:
 messages:
   - text: "<gold>Welcome, <green>%player_name%</green>!</gold> <newline><click:run_command:'/shop'><aqua>[Open shop]</aqua></click>"
     type: chat
-    period: 120
+    period: 120 # in ticks
 
   - text: "<yellow>Your balance: <green>%vault_eco_balance_fixed%</green> coins</yellow>"
     type: actionbar
